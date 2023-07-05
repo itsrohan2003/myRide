@@ -1,42 +1,56 @@
-.container {
+body {
+    background-image: url("rickshaw.png"); /* Replace "your-image-url.jpg" with the actual image URL */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-}
-
-.black-bg {
-    background-color: #292929;
-    flex: 1;
-    padding: 20px;
-    color: white;
-}
-
-.white-bg {
-    background-color: #ffffff;
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity value (0.5) for desired fading effect */
+    z-index: -1;
+}
+
+
+
+.header {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 48px;
+    font-family: 'Arial Black', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 button {
     display: block;
-    margin: 0px 20px;
+    margin: 10px;
     padding: 12px 24px;
     font-size: 16px;
+    font-family: 'Arial Black', sans-serif;
+    font-weight: bold;
     border-radius: 4px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+    background-color: transparent; /* Set the background to transparent */
+    color: #ff69b4; /* Set the font color to pinkish/violet */
+    border: 2px solid #ff69b4; /* Add a border with the same color as the font */
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(95, 107, 56, 0.2); /* Add box shadow */
-    border: 4px solid #4CAF50; /* Add border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: rgba(255, 105, 180, 0.1); /* Add a pinkish tint on hover */
 }
 
 a {
@@ -45,5 +59,36 @@ a {
 }
 
 a:hover {
-    color: #45a049;
+    color: #ffffff;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    height: 60px; /* Adjust the height as desired */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 1;
+    font-family: 'Roboto Mono', monospace; /* Use a cool monospaced font */
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav-buttons button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Roboto Mono', monospace; /* Use the same cool monospaced font for the buttons */
+}
+
+.nav-buttons button:hover {
+    background-color: violet;
+    color: white;
 }

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome to myRide</title>
-        <link rel="stylesheet" href="welcome.css">
+    <title>welcome to myRide</title>
+    <link rel="stylesheet" href="welcome.css">
 </head>
 <body>
-    <div class="container">
-        <div class="black-bg">
-            <h1>Welcome to myRide</h1>
+    <nav class="navbar">
+        <div class="nav-buttons">
+            <button>Button 1</button>
+            <button>Button 2</button>
+            <button>Button 3</button>
         </div>
-        <div class="white-bg">
-            <button><a href="newRide.html" target="_blank">Create a Ride</a></button>
-            <button><a href="searchRide.html" target="_blank">Search a Ride</a></button>
-        </div>
-    </div>
+    </nav>
+    <h1 class="header">Welcome to myRide</h1>
+    <button onclick="window.open('newRide.html', '_blank')">Create a Ride</button>
+    <button onclick="window.open('searchRide.html', '_blank')">Search a Ride</button>
 </body>
 </html>
