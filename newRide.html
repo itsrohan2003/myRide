@@ -10,7 +10,7 @@
     <script src="newRide.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-control-geocoder/1.17.0/Control.Geocoder.js"></script>
-   
+
     <style>
       .container {
         display: flex;
@@ -46,16 +46,19 @@
             id="current-location"
             name="current-location"
             required
+            placeholder="Enter your current location"
           />
-          <button type="button" onclick="setLocation('current-location')">
-            Set</button
-          ><br /><br />
-
+          <br><br>
+          
           <label for="destination">Destination:</label>
-          <input type="text" id="destination" name="destination" required />
-          <button type="button" onclick="setLocation('destination')">Set</button
-          ><br /><br />
-
+          <input
+            type="text"
+            id="destination"
+            name="destination"
+            required
+            placeholder="Enter your destination"
+          />
+          <br><br>
           <label for="total-cost">Total Cost:</label>
           <input
             type="number"
@@ -91,5 +94,56 @@
         <div id="map"></div>
       </div>
     </div>
+
+    <script>
+      let map;
+      let currentLocationMarker;
+      let destinationMarker;
+      let geocoder;
+
+      function initMap() {
+        const mapContainer = document.getElementById("map");
+        const mapContainerHeight = mapContainer.offsetHeight;
+
+        if (mapContainerHeight > 0) {
+          // Initialize the map centered at the specific location
+          map = L.map("map").setView([26.8439, 75.5652], 12);
+
+          // Add the OpenStreetMap tiles to the map
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution:
+              'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+          }).addTo(map);
+
+          // Add markers for current location and destination
+          currentLocationMarker = L.marker([26.8439, 75.5652], {
+            draggable: true,
+          })
+            .addTo(map)
+            .bindPopup("Current Location");
+
+          destinationMarker = L.marker([26.8289, 75.8056], { draggable: true })
+            .addTo(map)
+            .bindPopup("Destination");
+
+          geocoder = L.Control.geocoder({
+            defaultMarkGeocode: false,
+            placeholder: "Search...",
+            geocoder: L.Control.Geocoder.nominatim(),
+          }).on("markgeocode", function (e) {
+            const latlng = e.geocode.center;
+            if (e.target.options.id === "current-location") {
+              currentLocationMarker.setLatLng(latlng);
+              map.panTo(latlng);
+            } else if (e.target.options.id === "destination") {
+              destinationMarker.setLatLng(latlng);
+              map.panTo(latlng);
+            }
+          });
+        }
+      }
+
+      initMap();
+    </script>
   </body>
 </html>
