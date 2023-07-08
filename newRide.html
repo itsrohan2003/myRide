@@ -9,7 +9,8 @@
     />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-control-geocoder/1.17.0/Control.Geocoder.js"></script>
+    
+
 
     <style>
       .container {
@@ -45,7 +46,7 @@
       }
     </style>
   </head>
-  <body onload="initMap()">
+  <body>
     <div class="container">
       <div id="form-container">
         <h1>Create a Ride</h1>
@@ -120,47 +121,31 @@
       let geocoder;
 
       function initMap() {
-        const mapContainer = document.getElementById("map");
-        const mapContainerHeight = mapContainer.offsetHeight;
+  const mapContainer = document.getElementById("map");
+  const mapContainerHeight = mapContainer.offsetHeight;
 
-        if (mapContainerHeight > 0) {
-          // Initialize the map centered at the specific location
-          map = L.map("map").setView([26.8439, 75.5652], 12);
+  if (mapContainerHeight > 0) {
+    // Initialize the map centered at the specific location
+    map = L.map("map").setView([26.8439, 75.5652], 12);
 
-          // Add the OpenStreetMap tiles to the map
-          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution:
-              'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
-          }).addTo(map);
+    // Add the OpenStreetMap tiles to the map
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+    }).addTo(map);
 
-          // Add markers for current location and destination
-          currentLocationMarker = L.marker([26.8439, 75.5652], {
-            draggable: true,
-          })
-            .addTo(map)
-            .bindPopup("Current Location");
+    // Add markers for current location and destination
+    currentLocationMarker = L.marker([26.8439, 75.5652], {
+      draggable: true,
+    })
+      .addTo(map)
+      .bindPopup("Current Location");
 
-          destinationMarker = L.marker([26.8289, 75.8056], { draggable: true })
-            .addTo(map)
-            .bindPopup("Destination");
-
-          geocoder = L.Control.geocoder({
-            defaultMarkGeocode: false,
-            placeholder: "Search...",
-            geocoder: L.Control.Geocoder.nominatim(),
-          }).on("markgeocode", function (e) {
-            const latlng = e.geocode.center;
-            if (e.target.options.id === "current-location") {
-              currentLocationMarker.setLatLng(latlng);
-              map.panTo(latlng);
-            }
-            else if (e.target.options.id === "destination") {
-              destinationMarker.setLatLng(latlng);
-              map.panTo(latlng);
-            }
-          });
-        }
-      }
+    destinationMarker = L.marker([26.8289, 75.8056], { draggable: true })
+      .addTo(map)
+      .bindPopup("Destination");
+  }
+}
 
       function setLocation(fieldId) {
   const currentLocationValue = document.getElementById("current-location").value;

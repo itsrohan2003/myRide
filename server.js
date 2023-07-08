@@ -2,9 +2,14 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const https = require('https');
 
 let currentLocationData;
+let currentLocationCoords;
 let destinationData;
+let destinationCoords;
+
+const OPENCAGE_API_KEY = 'c986aaa28af74f65b90e997289e37903';
 
 const server = http.createServer((req, res) => {
   const reqUrl = url.parse(req.url, true);
@@ -23,6 +28,9 @@ const server = http.createServer((req, res) => {
 
     currentLocationData = currentLocation !== undefined ? currentLocation : undefined;
     destinationData = destination !== undefined ? destination : undefined;
+
+    // Geocode the updated location data
+    geocodeLocations();
 
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('Location data received');
@@ -57,5 +65,45 @@ function getContentType(filePath) {
       return 'text/css';
     default:
       return 'text/plain';
+  }
+}
+
+function geocodeLocations() {
+  if (currentLocationData) {
+    const currentLocationUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(currentLocationData)}&key=${OPENCAGE_API_KEY}`;
+    https.get(currentLocationUrl, (response) => {
+      let data = '';
+      response.on('data', (chunk) => {
+        data += chunk;
+      });
+      response.on('end', () => {
+        const currentLocationJson = JSON.parse(data);
+        const results = currentLocationJson.results;
+
+        if (results && results.length > 0) {
+          currentLocationCoords = results[0].geometry;
+          console.log('Geocoded Current Location:', currentLocationCoords);
+        }
+      });
+    });
+  }
+
+  if (destinationData) {
+    const destinationUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(destinationData)}&key=${OPENCAGE_API_KEY}`;
+    https.get(destinationUrl, (response) => {
+      let data = '';
+      response.on('data', (chunk) => {
+        data += chunk;
+      });
+      response.on('end', () => {
+        const destinationJson = JSON.parse(data);
+        const results = destinationJson.results;
+
+        if (results && results.length > 0) {
+          destinationCoords = results[0].geometry;
+          console.log('Geocoded Destination:', destinationCoords);
+        }
+      });
+    });
   }
 }
