@@ -1,0 +1,34 @@
+    let map;
+      let currentLocation;
+      let destination;
+      let currentLocationMarker;
+      let destinationMarker;
+      let geocoder;
+
+      function initMap() {
+  const mapContainer = document.getElementById("map");
+  const mapContainerHeight = mapContainer.offsetHeight;
+
+  if (mapContainerHeight > 0) {
+    // Initialize the map centered at the specific location
+    map = L.map("map").setView([26.8439, 75.5652], 12);
+
+    // Add the OpenStreetMap tiles to the map
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    // Add markers for current location and destination
+    currentLocationMarker = L.marker([26.8439, 75.5652], {
+      draggable: true,
+    })
+      .addTo(map)
+      .bindPopup("Current Location");
+
+    destinationMarker = L.marker([26.8289, 75.8056], { draggable: true })
+      .addTo(map)
+      .bindPopup("Destination");
+  }
+}
+initMap();

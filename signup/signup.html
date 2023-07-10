@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Account</title>
+    <link rel="stylesheet" href="signup.css" />
+  </head>
+  <body>
+    <h1>Sign-up</h1>
+
+    <form onsubmit="return checkPasswordMatch()">
+      <table>
+        <tr>
+          <td>Name:</td>
+          <td><input type="text" id="name" name="name" required /></td>
+        </tr>
+        <tr>
+          <td>Registration Number:</td>
+          <td>
+            <input
+              type="number"
+              id="registrationNumber"
+              name="registrationNumber"
+              min="1"
+              max="9999999999"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Course:</td>
+          <td><input type="text" id="course" name="course" required /></td>
+        </tr>
+        <tr>
+          <td>Year:</td>
+          <td>
+            <input
+              type="number"
+              id="year"
+              name="year"
+              min="1"
+              max="7  "
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Password:</td>
+          <td>
+            <input type="password" id="password" name="password" required />
+            <button type="button" id="showPassword">&#128065;</button>
+          </td>
+        </tr>
+        <tr>
+          <td>Confirm Password:</td>
+          <td>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+              x
+            />
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" value="Submit" /></td>
+        </tr>
+      </table>
+    </form>
+  </body>
+  <script>
+    const showPasswordButton = document.getElementById("showPassword");
+    const passwordInput = document.getElementById("password");
+
+    showPasswordButton.addEventListener("click", () => {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+      } else {
+        passwordInput.type = "password";
+      }
+    });
+
+    function checkPasswordMatch() {
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords don't match. Please make sure the passwords match.");
+        return false; // Prevent form submission
+      }
+
+      return true; // Allow form submission
+    }
+  </script>
+</html>

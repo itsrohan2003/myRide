@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>myRide Form</title>
+    <link rel="stylesheet" href="newRide.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css"
+    />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+
+    <style>
+      .container {
+        display: flex;
+      }
+
+      #form-container {
+        flex: 1;
+        padding-right: 20px;
+      }
+
+      #map-container {
+        flex: 1;
+      }
+
+      #map {
+        margin-top: 25vh;
+        height: 300px;
+        width: 75%;
+      }
+
+      .btn-set {
+        margin-top: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      .btn-set:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="form-container">
+        <h1>Create a Ride</h1>
+        <form>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required /><br /><br />
+
+          <label for="current-location">Current Location:</label>
+          <input
+            type="text"
+            id="current-location"
+            name="current-location"
+            required
+            placeholder="Enter your current location"
+          />
+          <button
+            type="button"
+            class="btn-set"
+            onclick="setLocation('current-location')"
+          >
+            Set Current Location
+          </button>
+          <br /><br />
+
+          <label for="destination">Destination:</label>
+          <input
+            type="text"
+            id="destination"
+            name="destination"
+            required
+            placeholder="Enter your destination"
+          />
+          <button
+            type="button"
+            class="btn-set"
+            onclick="setLocation('destination')"
+          >
+            Set Destination
+          </button>
+          <br /><br />
+
+          <label for="total-cost">Total Cost:</label>
+          <input
+            type="number"
+            id="total-cost"
+            name="total-cost"
+            step="0.01"
+            required
+          /><br /><br />
+
+          <label for="vehicle">Vehicle:</label>
+          <input type="text" id="vehicle" name="vehicle" required /><br /><br />
+
+          <label for="vacant-seats">Vacant Seats:</label>
+          <input
+            type="number"
+            id="vacant-seats"
+            name="vacant-seats"
+            required
+          /><br /><br />
+
+          <label for="ride-date">Date:</label>
+          <input
+            type="date"
+            id="ride-date"
+            name="ride-date"
+            required
+          /><br /><br />
+
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+      <div id="map-container">
+        <div id="map"></div>
+      </div>
+    </div>
+
+    <script>
+                let map;
+                let currentLocation;
+                let destination;
+                let currentLocationMarker;
+                let destinationMarker;
+                let geocoder;
+
+
+
+                function setLocation(fieldId) {
+            const currentLocationValue = document.getElementById("current-location").value;
+            const destinationValue = document.getElementById("destination").value;
+
+            // Send the location data to the server
+            const formData = {
+              "current-location": currentLocationValue,
+              "destination": destinationValue,
+            };
+
+            fetch(`/submit?current-location=${encodeURIComponent(currentLocationValue)}&destination=${encodeURIComponent(destinationValue)}`)
+              .then((response) => {
+                if (response.ok) {
+                  console.log(`Location data sent to server successfully`);
+                } else {
+                  console.log(`Failed to send location data to server`);
+                }
+              })
+              .catch((error) => {
+                console.error("Error sending location data to server:", error);
+              });
+          }
+          var loc1={{loc1}};
+          var loc2={{loc2}};
+          console.log('loc1:', loc1);
+          console.log('loc2:', loc2);
+          function initMap() {
+            const mapContainer = document.getElementById("map");
+            const mapContainerHeight = mapContainer.offsetHeight;
+
+            if (mapContainerHeight > 0) {
+              // Initialize the map centered at the specific location
+              map = L.map("map").setView([26.8439, 75.5652], 12);
+
+              // Add the OpenStreetMap tiles to the map
+              L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution:
+                  'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+              }).addTo(map);
+
+              // Add markers for current location and destination
+              currentLocationMarker = L.marker([loc1.lat,loc1.lng], {
+                draggable: true,
+              })
+                .addTo(map)
+                .bindPopup("Current Location");
+
+              destinationMarker = L.marker([loc2.lat,loc2.lng], { draggable: true })
+                .addTo(map)
+                .bindPopup("Destination");
+            }
+          }
+
+
+                initMap();
+    </script>
+  </body>
+</html>
