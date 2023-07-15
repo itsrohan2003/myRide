@@ -7,7 +7,7 @@
   <body>
     <h1>Sign-up</h1>
 
-    <form onsubmit="return checkPasswordMatch()">
+    <form action="/signup" method="POST" onsubmit="return checkPasswordMatch()">
       <table>
         <tr>
           <td>Name:</td>
@@ -64,7 +64,7 @@
         </tr>
         <tr>
           <td></td>
-          <td><input type="submit" value="Submit" /></td>
+          <td><input type="submit" value="Submit"/></td>
         </tr>
       </table>
     </form>
