@@ -23,6 +23,11 @@ const server = http.createServer((req, res) => {
         res.writeHead(302, { 'Location': 'http://localhost:5000/' });
         res.end();
     }
+    else if (pathname === '/signup/login.html') {
+        // Redirect to signupserver.js running on port 4000
+        res.writeHead(302, { 'Location': 'http://localhost:5000/login' });
+        res.end();
+    }
     else if (pathname === '/submit') {
         const query = reqUrl.query;
         const currentLocation = query['current-location'];

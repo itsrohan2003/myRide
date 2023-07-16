@@ -9,7 +9,7 @@ body {
   }
   
   /* Button styles */
-  button {
+  button, button a {
     padding: 8px;
     font-size: 14px;
     color: #FFFFFF;
@@ -37,5 +37,5 @@ body {
   }
   
   a:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }

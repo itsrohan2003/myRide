@@ -18,6 +18,14 @@ app.get('/signup.css', (req, res) => {
   res.sendFile(__dirname + '/signup.css');
 });
 
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/login.html');
+});
+
+app.get('/login.css', (req, res) => {
+  res.setHeader('Content-Type', 'text/css');
+  res.sendFile(__dirname + '/login.css');
+});
 // Create a MySQL connection pool
 const pool = mysql.createPool({
   connectionLimit: 10,
