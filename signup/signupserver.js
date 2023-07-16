@@ -61,7 +61,7 @@ app.post('/signup', (req, res) => {
               console.error('Error inserting data: ', error);
               res.status(500).send('Internal server error');
             } else {
-              res.status(200).send('User created successfully');
+              res.redirect('http://localhost:3000/Loggedin.html');
             }
           });
         }
