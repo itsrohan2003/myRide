@@ -41,6 +41,7 @@ app.get('/searchRide.css', (req, res) => {
     res.sendFile(__dirname + '/searchRide.css');
 });
 
+
 app.post('/submitForm', (req, res) => {
     const formData = req.body;
     console.log('Received form data:');
@@ -53,7 +54,6 @@ app.post('/submitForm', (req, res) => {
     res.end('Ride created :)');
 });
 
-//form handling closed
 
 
 
