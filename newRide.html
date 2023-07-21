@@ -50,9 +50,12 @@
     <div class="container">
       <div id="form-container">
         <h1>Create a Ride</h1>
-        <form>
+        <form action="/submitForm" method="post">
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" required /><br /><br />
+
+          <label for="registration_number">Registration Number</label>
+          <input type="number" id="registration_number" name="registration_number" required> <br><br>
 
           <label for="current-location">Current Location:</label>
           <input

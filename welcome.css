@@ -1,41 +1,95 @@
-/* Welcome.css */
-
-/* Body styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #222222;
-    color: #FFFFFF;
-    padding: 20px;
-  }
-  
-  /* Button styles */
-  button, button a {
-    padding: 8px;
-    font-size: 14px;
-    color: #FFFFFF;
-    background-color: #BB86FC;
-    border: none;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+    background-color: #1f1f1f;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: (0, 0, 0, 0.5); /* Adjust the opacity value (0.5) for desired fading effect */
+    z-index: -1;
+}
+
+
+
+.header {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 48px;
+    font-family: 'Arial Black', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button {
+    display: block;
+    margin: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-family: 'Arial Black', sans-serif;
+    font-weight: bold;
     border-radius: 4px;
+    background-color: transparent; /* Set the background to transparent */
+    color: #ff69b4; /* Set the font color to pinkish/violet */
+    border: 2px solid #ff69b4; /* Add a border with the same color as the font */
     cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #985ED3;
-  }
-  
-  /* Paragraph styles */
-  p {
-    color: #FFFFFF;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  /* Link styles */
-  a {
-    color: #BB86FC;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgba(255, 105, 180, 0.1); /* Add a pinkish tint on hover */
+}
+
+a {
     text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: none;
-  }
+    color: white;
+}
+
+a:hover {
+    color: #ffffff;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    height: 60px; /* Adjust the height as desired */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 1;
+    font-family: 'Roboto Mono', monospace; /* Use a cool monospaced font */
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nav-buttons button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Roboto Mono', monospace; /* Use the same cool monospaced font for the buttons */
+}
+
+.nav-buttons button:hover {
+    background-color: violet;
+    color: white;
+}
