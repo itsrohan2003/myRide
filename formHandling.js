@@ -50,7 +50,7 @@ app.post('/submitForm', (req, res) => {
     insertFormDataIntoDatabase(formData);
 
     res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Form data received and inserted into the database');
+    res.end('Ride created :)');
 });
 
 //form handling closed
